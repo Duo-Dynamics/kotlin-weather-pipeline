@@ -1,0 +1,13 @@
+notepad .gitignore
+```
+
+Paste this:
+```
+.gradle/
+build/
+*.class
+*.jar
+local.properties
+.idea/
+*.iml
+config/secrets.toml
