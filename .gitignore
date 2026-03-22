@@ -1,13 +1,13 @@
-notepad .gitignore
-```
-
-Paste this:
-```
-.gradle/
-build/
-*.class
-*.jar
-local.properties
-.idea/
+# Android generated files
 *.iml
-config/secrets.toml
+.gradle/
+/local.properties
+/.idea/
+/build/
+/captures/
+.externalNativeBuild/
+.caches/
+
+# Sensitive files
+local.properties       
+google-services.json   
