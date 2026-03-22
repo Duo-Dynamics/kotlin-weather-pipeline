@@ -1,13 +1,17 @@
-# Android generated files
-*.iml
 .gradle/
-/local.properties
-/.idea/
-/build/
-/captures/
-.externalNativeBuild/
-.caches/
-
-# Sensitive files
-local.properties       
-google-services.json   
+build/
+*.class
+*.jar
+*.war
+*.ear
+.idea/
+*.iml
+*.xml
+!gradle/wrapper/gradle-wrapper.properties
+.env
+local.properties
+*.key
+*.log
+logs/
+.DS_Store
+Thumbs.db
