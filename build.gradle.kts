@@ -26,10 +26,3 @@ dependencies {
 application {
     mainClass.set("com.weatherflow.main.MainKt")
 }
-```
-
----
-
-**Finally, create `local.properties`** in the project root:
-```
-hmac.secret=your_shared_secret_here
