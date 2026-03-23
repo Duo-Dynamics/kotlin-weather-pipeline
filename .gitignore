@@ -14,4 +14,4 @@ local.properties
 *.log
 logs/
 .DS_Store
-Thumbs.db
+Thumbs.dblocal.properties
