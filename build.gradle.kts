@@ -6,6 +6,10 @@ plugins {
 group = "com.weatherflow"
 version = "1.0.0"
 
+tasks.wrapper {
+    gradleVersion = "8.5"
+}
+
 repositories {
     mavenCentral()
 }
