@@ -8,6 +8,7 @@ build/
 *.iml
 *.xml
 !gradle/wrapper/gradle-wrapper.properties
+!gradle/wrapper/gradle-wrapper.jar
 .env
 local.properties
 *.key
