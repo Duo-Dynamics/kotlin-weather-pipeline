@@ -1,3 +1,5 @@
+package com.weatherflow.fetcher
+
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.Properties
