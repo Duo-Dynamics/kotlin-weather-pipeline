@@ -6,12 +6,14 @@ import com.weatherflow.model.WeatherPacket
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 import java.util.Properties
+import java.io.FileInputStream
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import com.weatherflow.config.Topics
 
 fun createProducer(): KafkaProducer<String, String> {
     val props = Properties()
-    props["bootstrap.servers"] = "localhost:9092"
+    props.load(FileInputStream("local.properties"))
     props["key.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
     props["value.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
     return KafkaProducer(props)
@@ -30,7 +32,7 @@ fun signPacket(packet: WeatherPacket, secretKey: String): WeatherPacket {
 fun sendToKafka(producer: KafkaProducer<String, String>, packet: WeatherPacket) {
     val mapper = ObjectMapper().registerKotlinModule()
     val json = mapper.writeValueAsString(packet)
-    val record = ProducerRecord<String, String>("raw-weather", packet.city, json)
+    val record = ProducerRecord<String, String>(Topics.RAW_WEATHER, packet.city, json)
     producer.send(record)
     producer.flush()
 }
