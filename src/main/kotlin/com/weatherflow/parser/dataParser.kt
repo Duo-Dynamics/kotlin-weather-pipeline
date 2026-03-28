@@ -1,4 +1,4 @@
-package com.weatherflow.cleaner
+package com.weatherflow.parser
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
