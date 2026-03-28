@@ -1,17 +1,18 @@
 package com.weatherflow.producer
 
 import com.weatherflow.model.WeatherPacket
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
-import com.weatherflow.kafka.createProducer
 import com.weatherflow.kafka.sendToKafka
+import org.apache.kafka.clients.producer.KafkaProducer
+import com.weatherflow.config.Topics
+import com.weatherflow.crypto.computeHmac
 
-fun signPacket(packet: WeatherPacket, secretKey: String): WeatherPacket {
+private fun signPacket(packet: WeatherPacket, secretKey: String): WeatherPacket {
     val data = "${packet.city}${packet.temperature}${packet.humidity}${packet.description}${packet.timestamp}"
-    val mac = Mac.getInstance("HmacSHA256")
-    val keySpec = SecretKeySpec(secretKey.toByteArray(), "HmacSHA256")
-    mac.init(keySpec)
-    val signature = mac.doFinal(data.toByteArray())
-        .joinToString("") { "%02x".format(it) }
+    val signature = computeHmac(data, secretKey)
     return packet.copy(signature = signature)
+}
+
+fun produceWeather(packet: WeatherPacket, secretKey: String, producer: KafkaProducer<String, String>){
+    val signed = signPacket(packet, secretKey)
+    sendToKafka(producer, signed, Topics.RAW_WEATHER)
 }
